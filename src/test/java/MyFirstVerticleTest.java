@@ -27,7 +27,6 @@ public class MyFirstVerticleTest {
 
         ServerSocket socket = new ServerSocket(0);
         port = socket.getLocalPort();
-        System.out.println(">>>>> Using port " + port);
         socket.close();
 
         JsonObject deploymentConfig = new JsonObject().put("http.port", port);

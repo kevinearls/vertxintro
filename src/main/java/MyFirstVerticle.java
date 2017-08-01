@@ -41,15 +41,14 @@ public class MyFirstVerticle extends AbstractVerticle {
         router.post("/api/whiskies").handler(this::addOne);
         router.delete("/api/whiskies/:id").handler(this::deleteOne);
 
-
+        // Retrieve the port from the configuration, default to 8080.
+        Integer port = config().getInteger("http.port", 8080);
+        System.out.println(">>>> Using port " + port);
 
         vertx
                 .createHttpServer()
                 .requestHandler(router::accept)
-                .listen(
-                        // Retrieve the port from the configuration,
-                        // default to 8080.
-                        config().getInteger("http.port", 8080),
+                .listen( port,
                         result -> {
                             if (result.succeeded()) {
                                 fut.complete();
